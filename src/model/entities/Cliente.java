@@ -1,40 +1,67 @@
 package model.entities;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Cliente {
-    private  String cpf;
-    private  String nome;
-    private List<Pedido> pedidos =  new ArrayList<>();
+    private  List<String> nome;
+    private Integer numeroMesa;
 
     public Cliente(){
     }
 
-    public  Cliente(String cpf, String nome){
-        this.cpf = cpf;
+    public Cliente(List<String> nome, Integer numeroMesa) {
         this.nome = nome;
-
+        this.numeroMesa = numeroMesa;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getNome() {
+    public List<String> getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public Cliente(List<String> nome) {
         this.nome = nome;
     }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
+    public void setNome(List<String> nome) {
+        this.nome = nome;
     }
+
+    public Integer getNumeroMesa() {
+        return numeroMesa;
+    }
+
+    public void setNumeroMesa(Integer numeroMesa) {
+        this.numeroMesa = numeroMesa;
+    }
+
+    public void receberClinte() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Olá, Poderia informar seu nome?:");
+
+        String nome = scanner.nextLine();
+
+        if (nome == null || nome.trim().isEmpty()) {
+            throw  new IllegalArgumentException("Esse campo não pode ser vazio!");
+        }
+
+        if (!nome.matches("^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$")) {
+            System.out.println("Esse campo não pode conter numeros!");
+        }
+
+        List<String> adicionarNome = new ArrayList<>();
+
+        adicionarNome.add(nome);
+
+
+
+        JOptionPane.showMessageDialog(null, "Cliente Cadastrado com Sucesso!");
+
+
+    }
+
+
 
 }

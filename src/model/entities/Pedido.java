@@ -1,53 +1,49 @@
 package model.entities;
 
+import javax.swing.*;
+import java.io.File;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
-public class Pedido {
-    private Integer id;
-    private Cliente cliente;
-    private HashMap<Item, Integer> itens = new HashMap<>();
+public class Pedido extends Cliente {
+    private LocalDateTime horaPedido;
+    private List<Cliente> clientes;
 
-    public Pedido() {
+    public  Pedido() {
+
     }
 
-    public Pedido(Integer id, Cliente cliente) {
-        this.id = id;
-        this.cliente = cliente;
+    public Pedido(LocalDateTime horaPedido) {
+        this.horaPedido = horaPedido;
     }
 
-    public Integer getId() {
-        return id;
+    public Pedido(List<String> nome, Integer numeroMesa, LocalDateTime horaPedido) {
+        super(nome, numeroMesa);
+        this.horaPedido = horaPedido;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public  void montarPedido() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Confirme o nome:");
+        String nome = sc.nextLine();
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public HashMap<Item, Integer> getItens() {
-        return itens;
-    }
-
-    public void setItens(HashMap<Item, Integer> itens) {
-        this.itens = itens;
-    }
-
-    public void listarPedido() {
-        for(Item chave : itens.keySet()) {
-            Integer dado = itens.get(chave);
-
-            System.out.println( "Items " + chave + " dados " + dado);
+        for (int i = 0; i< clientes.size();i++) {
+            if (nome.equalsIgnoreCase(String.valueOf(clientes.get(0).getNome()))) {
+                throw  new RuntimeException("Cliente Não encontrado!");
+            }
+            System.out.println("Perfeito, Seja-Bem-Vindo, Sr(a)" + nome);
         }
-    }
+
+        System.out.println("Oque gostaria de comer hoje, Sr(a) " + nome +" ? ");
+
+        System.out.println("Digite o numero do pedido, que será preparado!");
+
+        int numeroPedido = sc.nextInt();
 
 
-    public void calcularTotal() {
+
     }
+
 }
